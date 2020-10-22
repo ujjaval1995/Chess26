@@ -16,6 +16,25 @@ public class Board
 			board[1][j] = new Pawn("black");
 			board[6][j] = new Pawn("white");
 		}
+		for (int j=0; j<8; j+=7)
+		{
+			board[0][j] = new Rook("black");
+			board[7][j] = new Rook("white");
+		}
+		for (int j=0; j<8; j+=5)
+		{
+			board[0][j] = new Knight("black");
+			board[7][j] = new Knight("white");
+		}
+		for (int j=0; j<8; j+=3)
+		{
+			board[0][j] = new Bishop("black");
+			board[7][j] = new Bishop("white");
+		}
+		board[0][3] = new Queen("black");
+		board[7][3] = new Queen("white");
+		board[0][4] = new King("black");
+		board[7][4] = new King("white");
 	}
 	
 	static void print_board()
