@@ -5,7 +5,9 @@ public class Chess
 
 	public static void main(String[] args)
 	{
-		System.out.println("qwerty");
+		Board.make_board();
+		Board.initialize_board();
+		Board.print_board();
 	}
 
 }
