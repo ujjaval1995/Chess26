@@ -21,12 +21,12 @@ public class Board
 			board[0][j] = new Rook("black");
 			board[7][j] = new Rook("white");
 		}
-		for (int j=0; j<8; j+=5)
+		for (int j=1; j<8; j+=5)
 		{
 			board[0][j] = new Knight("black");
 			board[7][j] = new Knight("white");
 		}
-		for (int j=0; j<8; j+=3)
+		for (int j=2; j<8; j+=3)
 		{
 			board[0][j] = new Bishop("black");
 			board[7][j] = new Bishop("white");
