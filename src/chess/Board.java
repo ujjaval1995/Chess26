@@ -11,7 +11,11 @@ public class Board
 	
 	static void initialize_board()
 	{
-		
+		for (int j=0; j<8; j++)
+		{
+			board[1][j] = new Pawn("black");
+			board[6][j] = new Pawn("white");
+		}
 	}
 	
 	static void print_board()
