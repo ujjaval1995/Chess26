@@ -21,5 +21,5 @@ public abstract class Piece
 		}
 	}
 	
-	public abstract boolean move(int r1, int c1, int r2, int c2);
+	public abstract boolean move(String input);
 }

@@ -12,7 +12,7 @@ public class King extends Piece
 		return super.toString() + "K";
 	}
 
-	public boolean move(int r1, int c1, int r2, int c2)
+	public boolean move(String input)
 	{
 		return true;
 	}

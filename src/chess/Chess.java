@@ -6,6 +6,18 @@ public class Chess
 {
 	static String turn = "white";
 	
+	static void print_turn()
+	{
+		if (turn.equals("white"))
+		{
+			System.out.print("White's Turn: ");
+		}
+		else
+		{
+			System.out.print("Black's Turn: ");
+		}
+	}
+	
 	static void change_turn()
 	{
 		if (turn.equals("white"))
@@ -59,20 +71,13 @@ public class Chess
 		while (true)
 		{	
 			Board.print_board();
-			if (turn.equals("white"))
-			{
-				System.out.print("\nWhite's Turn: ");
-			}
-			else
-			{
-				System.out.print("\nBlack's Turn: ");
-			}
-			String input = sc.nextLine();
+			print_turn();
 			
-			char file1 = input.charAt(0);
-			char rank1 = input.charAt(1);
-			char file2 = input.charAt(3);
-			char rank2 = input.charAt(4);
+			String input = sc.nextLine();
+			char file = input.charAt(0);
+			char rank = input.charAt(1);
+			
+			Board.board[file_to_row(file)][rank_to_col(rank)].move(input);
 			
 			System.out.println();
 			change_turn();
