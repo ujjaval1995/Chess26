@@ -12,8 +12,8 @@ public class Queen extends Piece
 		return super.toString() + "Q";
 	}
 
-	void move()
+	public boolean move(int r1, int c1, int r2, int c2)
 	{
-		
+		return true;
 	}
 }
