@@ -29,38 +29,6 @@ public class Chess
 			turn = "white";
 		}
 	}
-	
-	static int file_to_row(char file)
-	{
-		switch (file)
-		{
-			case 'a': return 0;
-			case 'b': return 1;
-			case 'c': return 2;
-			case 'd': return 3;
-			case 'e': return 4;
-			case 'f': return 5;
-			case 'g': return 6;
-			case 'h': return 7;
-		}
-		return -1;
-	}
-	
-	static int rank_to_col(char rank)
-	{
-		switch(rank)
-		{
-			case '8': return 0;
-			case '7': return 1;
-			case '6': return 2;
-			case '5': return 3;
-			case '4': return 4;
-			case '3': return 5;
-			case '2': return 6;
-			case '1': return 7;
-		}
-		return -1;
-	}
 
 	public static void main(String[] args)
 	{
@@ -78,10 +46,10 @@ public class Chess
 				print_turn();
 				input = sc.nextLine();
 				if (input.length() < 5) continue;
-				row1 = file_to_row(input.charAt(0));
-				col1 = rank_to_col(input.charAt(1));
-				row2 = file_to_row(input.charAt(3));
-				col2 = rank_to_col(input.charAt(4));
+				col1 = Board.file_to_col(input.charAt(0));
+				row1 = Board.rank_to_row(input.charAt(1));
+				col2 = Board.file_to_col(input.charAt(3));
+				row2 = Board.rank_to_row(input.charAt(4));
 			}
 			while (row1 == -1 || col1 == -1 || row2 == -1 || col2 == -1);
 			Board.board[row1][col1].move(input);
