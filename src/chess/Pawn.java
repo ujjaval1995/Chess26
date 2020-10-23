@@ -53,7 +53,7 @@ public class Pawn extends Piece
 				return false;
 			}
 		}
-		else
+		else // black
 		{
 			if (col1 == col2 && Board.board[row2][col2] == null) // regular
 			{
