@@ -72,18 +72,19 @@ public class Chess
 		{	
 			Board.print_board();
 			String input = "";
-			int row = -1;
-			int col = -1;
+			int row1 = -1, col1 = -1, row2 = -1, col2 = -1;
 			do
 			{
 				print_turn();
 				input = sc.nextLine();
 				if (input.length() < 5) continue;
-				row = file_to_row(input.charAt(0));
-				col = rank_to_col(input.charAt(1));
+				row1 = file_to_row(input.charAt(0));
+				col1 = rank_to_col(input.charAt(1));
+				row2 = file_to_row(input.charAt(3));
+				col2 = rank_to_col(input.charAt(4));
 			}
-			while (row == -1 || col == -1);
-			Board.board[row][col].move(input);
+			while (row1 == -1 || col1 == -1 || row2 == -1 || col2 == -1);
+			Board.board[row1][col1].move(input);
 			
 			System.out.println();
 			change_turn();
