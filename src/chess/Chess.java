@@ -18,7 +18,7 @@ public class Chess
 		}
 	}
 	
-	int file_to_row(char file)
+	static int file_to_row(char file)
 	{
 		switch (file)
 		{
@@ -34,7 +34,7 @@ public class Chess
 		return -1;
 	}
 	
-	int rank_to_col(char rank)
+	static int rank_to_col(char rank)
 	{
 		switch(rank)
 		{
