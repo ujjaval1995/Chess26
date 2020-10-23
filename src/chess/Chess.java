@@ -71,13 +71,19 @@ public class Chess
 		while (true)
 		{	
 			Board.print_board();
-			print_turn();
-			
-			String input = sc.nextLine();
-			char file = input.charAt(0);
-			char rank = input.charAt(1);
-			
-			Board.board[file_to_row(file)][rank_to_col(rank)].move(input);
+			String input = "";
+			int row = -1;
+			int col = -1;
+			do
+			{
+				print_turn();
+				input = sc.nextLine();
+				if (input.length() < 5) continue;
+				row = file_to_row(input.charAt(0));
+				col = rank_to_col(input.charAt(1));
+			}
+			while (row == -1 || col == -1);
+			Board.board[row][col].move(input);
 			
 			System.out.println();
 			change_turn();
