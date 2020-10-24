@@ -132,15 +132,21 @@ public class Board
 		
 		Piece king = Board.board[0][0];
 		int x=0, y=0;
-		for (; x<8; x++)
+		boolean flag = false;
+		for (x=0; x<8; x++)
 		{
-			for (; y<8; y++)
+			for (y=0; y<8; y++)
 			{
 				king = Board.board[x][y];
 				if (king != null && king instanceof King && king.color.equals(color))
 				{
+					flag = true;
 					break;
 				}
+			}
+			if (flag)
+			{
+				break;
 			}
 		}
 		Piece attacker = null;
@@ -151,10 +157,11 @@ public class Board
 				attacker = Board.board[i][j];
 				if (attacker != null && attacker.color.equals(other))
 				{
-					if (attacker.move(col_to_file(j) + row_to_rank(i) + " " + col_to_file(y) + row_to_rank(x)) == true)
+					if (attacker.move(col_to_file(j) + "" + row_to_rank(i) + " " + col_to_file(y) + "" + row_to_rank(x)) == true)
 					{
 						Board.board[x][y] = king;
 						Board.board[i][j] = attacker;
+						// System.out.println(color + " in check by " + col_to_file(j) + row_to_rank(i));
 						return true;
 					}
 				}

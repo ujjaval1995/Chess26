@@ -14,6 +14,6 @@ public class King extends Piece
 
 	public boolean move(String input)
 	{
-		return true;
+		return false;
 	}
 }

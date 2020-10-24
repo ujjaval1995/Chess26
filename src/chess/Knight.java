@@ -14,6 +14,6 @@ public class Knight extends Piece
 
 	public boolean move(String input)
 	{
-		return true;
+		return false;
 	}
 }
