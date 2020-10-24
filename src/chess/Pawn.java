@@ -26,7 +26,7 @@ public class Pawn extends Piece
 		
 		if (this.color.equals("white"))
 		{
-			if (col1 == col2 && Board.board[row2][col2] == null) // regular
+			if (col1 == col2 && Board.board[row2][col2] == null) // move
 			{
 				if (row1-1 == row2 && col1 == col2) // move 1
 				{
@@ -44,16 +44,30 @@ public class Pawn extends Piece
 					return true;
 				}
 			}
-			else if (row1-1 == row2 && (col1-1 == col2 || col1+1 == col2) && Board.board[row2][col2] != null) // capture
+			else if (row1-1 == row2 && (col1-1 == col2 || col1+1 == col2)) // capture
 			{
-				Board.board[row2][col2] = this;
-				Board.board[row1][col1] = null;
-				moved = true;
-				return true;
-			}
-			else
-			{
-				return false;
+				if (Board.board[row2][col2] == null) // en passant
+				{
+					Piece piece = Board.board[row1][col2];
+					if (piece != null && piece instanceof Pawn)
+					{
+						Pawn pawn = (Pawn) piece;
+						if (pawn.color.equals("black") && pawn.enpassant == true)
+						{
+							Board.board[row2][col2] = this;
+							Board.board[row1][col2] = null;
+							moved = true;
+							return true;
+						}
+					}
+				}
+				else // regular
+				{
+					Board.board[row2][col2] = this;
+					Board.board[row1][col1] = null;
+					moved = true;
+					return true;
+				}
 			}
 		}
 		else // black
@@ -72,19 +86,34 @@ public class Pawn extends Piece
 					Board.board[row2][col2] = this;
 					Board.board[row1][col1] = null;
 					moved = true;
+					enpassant = true;
 					return true;
 				}
 			}
-			else if (row1+1 == row2 && (col1-1 == col2 || col1+1 == col2) && Board.board[row2][col2] != null) // capture
+			else if (row1+1 == row2 && (col1-1 == col2 || col1+1 == col2)) // capture
 			{
-				Board.board[row2][col2] = this;
-				Board.board[row1][col1] = null;
-				moved = true;
-				return true;
-			}
-			else
-			{
-				return false;
+				if (Board.board[row2][col2] == null) // en passant
+				{
+					Piece piece = Board.board[row1][col2];
+					if (piece != null && piece instanceof Pawn)
+					{
+						Pawn pawn = (Pawn) piece;
+						if (pawn.color.equals("white") && pawn.enpassant == true)
+						{
+							Board.board[row2][col2] = this;
+							Board.board[row1][col2] = null;
+							moved = true;
+							return true;
+						}
+					}
+				}
+				else // regular
+				{
+					Board.board[row2][col2] = this;
+					Board.board[row1][col1] = null;
+					moved = true;
+					return true;
+				}
 			}
 		}
 		return false;
