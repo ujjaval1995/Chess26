@@ -33,6 +33,7 @@ public class Pawn extends Piece
 					Board.board[row2][col2] = this;
 					Board.board[row1][col1] = null;
 					moved = true;
+					if (row2 == 7) promote(input);
 					return true;
 				}
 				else if (row1-2 == row2 && Board.board[row1-1][col2] == null && !moved) // move 2
@@ -66,6 +67,7 @@ public class Pawn extends Piece
 					Board.board[row2][col2] = this;
 					Board.board[row1][col1] = null;
 					moved = true;
+					if (row2 == 7) promote(input);
 					return true;
 				}
 			}
@@ -79,6 +81,7 @@ public class Pawn extends Piece
 					Board.board[row2][col2] = this;
 					Board.board[row1][col1] = null;
 					moved = true;
+					if (row2 == 0) promote(input);
 					return true;
 				}
 				else if (row1+2 == row2 && Board.board[row1+1][col2] == null && !moved) // move 2
@@ -112,10 +115,47 @@ public class Pawn extends Piece
 					Board.board[row2][col2] = this;
 					Board.board[row1][col1] = null;
 					moved = true;
+					if (row2 == 0) promote(input);
 					return true;
 				}
 			}
 		}
 		return false;
+	}
+	
+	public void promote(String input)
+	{
+		int col1 = Board.file_to_col(input.charAt(0));
+		int row1 = Board.rank_to_row(input.charAt(1));
+		int col2 = Board.file_to_col(input.charAt(3));
+		int row2 = Board.rank_to_row(input.charAt(4));
+		
+		if (input.length() >= 7)
+		{
+			char c = input.charAt(6);
+			switch (c)
+			{
+				case 'R':
+					Board.board[row2][col2] = new Rook(this.color);
+					Board.board[row1][col1] = null;
+					break;
+				case 'N':
+					Board.board[row2][col2] = new Knight(this.color);
+					Board.board[row1][col1] = null;
+					break;
+				case 'B':
+					Board.board[row2][col2] = new Bishop(this.color);
+					Board.board[row1][col1] = null;
+					break;
+				default:
+					Board.board[row2][col2] = new Queen(this.color);
+					Board.board[row1][col1] = null;
+			}
+		}
+		else
+		{
+			Board.board[row2][col2] = new Queen(this.color);
+			Board.board[row1][col1] = null;
+		}
 	}
 }
