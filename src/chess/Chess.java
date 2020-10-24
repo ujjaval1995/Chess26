@@ -58,12 +58,19 @@ public class Chess
 	{
 		try
 		{
-		      File file = new File("game1.txt");
+		      File file = new File("src/game1.txt");
 		      Scanner sc = new Scanner(file);
 		      while (sc.hasNextLine())
 		      {
+		    	  Board.print_board();
+		    	  print_turn();
+		    	  
 		    	  String input = sc.nextLine();
 		    	  System.out.println(input);
+		    	  
+		    	  System.out.println();
+		    	  change_turn();
+		    	  increment_turn_count();
 		      }
 		     sc.close();
 		}
@@ -72,6 +79,7 @@ public class Chess
 		      System.out.println("An error occurred.");
 		      e.printStackTrace();
 		}
+		game_over = true;
 	}
 
 	public static void main(String[] args)
@@ -79,8 +87,9 @@ public class Chess
 		Board.make_board();
 		Board.initialize_board();
 		
-		Scanner sc = new Scanner(System.in);
+		read_from_file();
 		
+		Scanner sc = new Scanner(System.in);
 		while (!game_over)
 		{	
 			Board.print_board();
@@ -122,6 +131,6 @@ public class Chess
 			change_turn();
 			increment_turn_count();
 		}
-		//sc.close();
+		sc.close();
 	}
 }
