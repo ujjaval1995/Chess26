@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Chess
 {
-	static int turn_count = 0;
 	static String turn = "white";
+	static int turn_count = 0;
 	static boolean game_over = false;
 	
 	static void print_turn()

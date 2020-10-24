@@ -158,4 +158,11 @@ public class Pawn extends Piece
 			Board.board[row1][col1] = null;
 		}
 	}
+	
+	public boolean[][] get_moves()
+	{
+		boolean arr[][] = new boolean[8][8];
+		return arr;
+	}
+	
 }
