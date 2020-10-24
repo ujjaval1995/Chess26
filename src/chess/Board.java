@@ -94,6 +94,38 @@ public class Board
 		return -1;
 	}
 	
+	static char col_to_file(int col)
+	{
+		switch (col)
+		{
+			case 0: return 'a';
+			case 1: return 'b';
+			case 2: return 'c';
+			case 3: return 'd';
+			case 4: return 'e';
+			case 5: return 'f';
+			case 6: return 'g';
+			case 7: return 'h';
+		}
+		return ' ';
+	}
+	
+	static char row_to_rank(int row)
+	{
+		switch(row)
+		{
+			case 0: return '8';
+			case 1: return '7';
+			case 2: return '6';
+			case 3: return '5';
+			case 4: return '4';
+			case 5: return '3';
+			case 6: return '2';
+			case 7: return '1';
+		}
+		return ' ';
+	}
+	
 	static boolean check(String color)
 	{
 		String other = color.equals("white") ? "black" : "white";
