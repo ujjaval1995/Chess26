@@ -3,11 +3,13 @@ package chess;
 public class Pawn extends Piece
 {
 	boolean moved;
+	boolean enpassant;
 	
 	Pawn(String color)
 	{
 		super(color);
 		this.moved = false;
+		this.enpassant = false;
 	}
 	
 	public String toString()
@@ -38,6 +40,7 @@ public class Pawn extends Piece
 					Board.board[row2][col2] = this;
 					Board.board[row1][col1] = null;
 					moved = true;
+					enpassant = true;
 					return true;
 				}
 			}

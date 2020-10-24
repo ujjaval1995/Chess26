@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Chess
 {
+	static int turn_count = 0;
 	static String turn = "white";
 	static boolean game_over = false;
 	
@@ -29,6 +30,26 @@ public class Chess
 		{
 			turn = "white";
 		}
+	}
+	
+	static void increment_turn_count()
+	{
+		for (int i=0; i<8; i++)
+		{
+			for (int j=0; j<8; j++)
+			{
+				Piece piece = Board.board[i][j];
+				if (piece != null && piece instanceof Pawn)
+				{
+					if (turn.equals(piece.color))
+					{
+						Pawn pawn = (Pawn) piece;
+						pawn.enpassant = false;
+					}
+				}
+			}
+		}
+		turn_count++;
 	}
 
 	public static void main(String[] args)
@@ -77,6 +98,7 @@ public class Chess
 			
 			System.out.println();
 			change_turn();
+			increment_turn_count();
 		}
 		//sc.close();
 	}
