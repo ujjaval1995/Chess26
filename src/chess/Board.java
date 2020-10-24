@@ -93,4 +93,10 @@ public class Board
 		}
 		return -1;
 	}
+	
+	static boolean check()
+	{
+		return false;
+	}
+	
 }
