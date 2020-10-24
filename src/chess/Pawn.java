@@ -1,7 +1,5 @@
 package chess;
 
-import java.util.Arrays;
-
 public class Pawn extends Piece
 {
 	boolean moved;
@@ -26,7 +24,7 @@ public class Pawn extends Piece
 		int col2 = Board.file_to_col(input.charAt(3));
 		int row2 = Board.rank_to_row(input.charAt(4));
 		
-		if (this.color.equals("white"))
+		if (color.equals("white"))
 		{
 			if (col1 == col2 && Board.board[row2][col2] == null) // move
 			{
@@ -34,7 +32,6 @@ public class Pawn extends Piece
 				{
 					Board.board[row2][col2] = this;
 					Board.board[row1][col1] = null;
-					moved = true;
 					if (row2 == 7)
 					{
 						if (promote(input) == false)
@@ -42,14 +39,33 @@ public class Pawn extends Piece
 							return false;
 						}
 					}
+					if (Board.check(color))
+					{
+						Board.board[row2][col2] = null;
+						Board.board[row1][col1] = this;
+						return false;
+					}
+					else
+					{
+						moved = true;
+					}
 					return true;
 				}
-				else if (row1-2 == row2 && Board.board[row1-1][col2] == null && !moved) // move 2
+				else if (row1-2 == row2 && Board.board[row1-1][col2] == null && !moved) // move 2 NEED TO ADD CHECKS HERE AND BELOW
 				{
 					Board.board[row2][col2] = this;
 					Board.board[row1][col1] = null;
-					moved = true;
-					enpassant = true;
+					if (Board.check(color))
+					{
+						Board.board[row2][col2] = null;
+						Board.board[row1][col1] = this;
+						return false;
+					}
+					else
+					{
+						moved = true;
+						enpassant = true;
+					}
 					return true;
 				}
 			}
