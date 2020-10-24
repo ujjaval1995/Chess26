@@ -1,5 +1,7 @@
 package chess;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Chess
@@ -50,6 +52,26 @@ public class Chess
 			}
 		}
 		turn_count++;
+	}
+	
+	static void read_from_file()
+	{
+		try
+		{
+		      File file = new File("game1.txt");
+		      Scanner sc = new Scanner(file);
+		      while (sc.hasNextLine())
+		      {
+		    	  String input = sc.nextLine();
+		    	  System.out.println(input);
+		      }
+		     sc.close();
+		}
+		catch (FileNotFoundException e)
+		{
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args)
