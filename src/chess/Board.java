@@ -97,6 +97,19 @@ public class Board
 	static boolean check(String color)
 	{
 		String other = color.equals("white") ? "black" : "white";
+		
+		int x=0, y=0;
+		for (; x<8; x++)
+		{
+			for (; y<8; y++)
+			{
+				Piece piece = Board.board[x][y];
+				if (piece != null && piece instanceof King && piece.color.equals(color))
+				{
+					break;
+				}
+			}
+		}
 		for (int i=0; i<8; i++)
 		{
 			for (int j=0; j<8; j++)
@@ -104,19 +117,9 @@ public class Board
 				Piece piece = Board.board[i][j];
 				if (piece != null && piece.color.equals(other))
 				{
-					for (int x=0; x<8; x++)
+					if (piece.get_moves(i, j)[x][y] == true)
 					{
-						for (int y=0; y<8; y++)
-						{
-							if (piece.get_moves(i, j)[x][y] == true)
-							{
-								Piece piece2 = Board.board[x][y];
-								if (piece2 != null && piece2 instanceof King && piece2.color.equals(color))
-								{
-									return true;
-								}
-							}
-						}
+						return true;
 					}
 				}
 			}
