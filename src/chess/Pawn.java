@@ -28,45 +28,49 @@ public class Pawn extends Piece
 		{
 			if (col1 == col2 && Board.board[row2][col2] == null) // move
 			{
-				if (row1-1 == row2 && col1 == col2) // move 1
+				if (row1-1 == row2) // move 1
 				{
-					Board.board[row2][col2] = this;
 					Board.board[row1][col1] = null;
+					Board.board[row2][col2] = this;
 					if (row2 == 7)
 					{
 						if (promote(input) == false)
 						{
 							return false;
 						}
+						else
+						{
+							return true;
+						}
 					}
 					if (Board.check(color))
 					{
-						Board.board[row2][col2] = null;
 						Board.board[row1][col1] = this;
+						Board.board[row2][col2] = null;
 						return false;
 					}
 					else
 					{
 						moved = true;
+						return true;
 					}
-					return true;
 				}
-				else if (row1-2 == row2 && Board.board[row1-1][col2] == null && !moved) // move 2 NEED TO ADD CHECKS HERE AND BELOW
+				else if (row1-2 == row2 && Board.board[row1-1][col2] == null && !moved) // move 2
 				{
-					Board.board[row2][col2] = this;
 					Board.board[row1][col1] = null;
+					Board.board[row2][col2] = this;
 					if (Board.check(color))
 					{
-						Board.board[row2][col2] = null;
 						Board.board[row1][col1] = this;
+						Board.board[row2][col2] = null;
 						return false;
 					}
 					else
 					{
 						moved = true;
 						enpassant = true;
+						return true;
 					}
-					return true;
 				}
 			}
 			else if (row1-1 == row2 && (col1-1 == col2 || col1+1 == col2)) // capture
@@ -79,54 +83,100 @@ public class Pawn extends Piece
 						Pawn pawn = (Pawn) piece;
 						if (pawn.color.equals("black") && pawn.enpassant == true)
 						{
-							Board.board[row2][col2] = this;
+							Board.board[row1][col1] = null;
 							Board.board[row1][col2] = null;
-							moved = true;
-							return true;
+							Board.board[row2][col2] = this;
+							if (Board.check(color))
+							{
+								Board.board[row1][col1] = this;
+								Board.board[row1][col2] = piece;
+								Board.board[row2][col2] = null;
+								return false;
+							}
+							else
+							{
+								return true;
+							}
 						}
 					}
 				}
 				else // regular
 				{
-					Board.board[row2][col2] = this;
+					Piece piece = Board.board[row2][col2];
 					Board.board[row1][col1] = null;
-					moved = true;
+					Board.board[row2][col2] = this;
 					if (row2 == 7)
 					{
 						if (promote(input) == false)
 						{
 							return false;
 						}
+						else
+						{
+							return true;
+						}
 					}
-					return true;
+					if (Board.check(color))
+					{
+						Board.board[row1][col1] = this;
+						Board.board[row2][col2] = piece;
+						return false;
+					}
+					else
+					{
+						moved = true;
+						return true;
+					}
 				}
 			}
 		}
 		else // black
 		{
-			if (col1 == col2 && Board.board[row2][col2] == null) // regular
+			if (col1 == col2 && Board.board[row2][col2] == null) // move
 			{
-				if (row1+1 == row2 && col1 == col2) // move 1
+				if (row1+1 == row2) // move 1
 				{
-					Board.board[row2][col2] = this;
 					Board.board[row1][col1] = null;
-					moved = true;
+					Board.board[row2][col2] = this;
 					if (row2 == 0)
 					{
 						if (promote(input) == false)
 						{
 							return false;
 						}
+						else
+						{
+							return true;
+						}
 					}
-					return true;
+					if (Board.check(color))
+					{
+						Board.board[row1][col1] = this;
+						Board.board[row2][col2] = null;
+						return false;
+					}
+					else
+					{
+						moved = true;
+						return true;
+					}
 				}
 				else if (row1+2 == row2 && Board.board[row1+1][col2] == null && !moved) // move 2
 				{
-					Board.board[row2][col2] = this;
 					Board.board[row1][col1] = null;
-					moved = true;
-					enpassant = true;
-					return true;
+					Board.board[row2][col2] = this;
+					if (Board.check(color))
+					{
+						Board.board[row1][col1] = this;
+						Board.board[row2][col2] = null;
+						return false;
+					}
+					else
+					{
+						moved = true;
+						enpassant = true;
+						return true;
+					}
 				}
 			}
 			else if (row1+1 == row2 && (col1-1 == col2 || col1+1 == col2)) // capture
@@ -137,28 +187,52 @@ public class Pawn extends Piece
 					if (piece != null && piece instanceof Pawn)
 					{
 						Pawn pawn = (Pawn) piece;
-						if (pawn.color.equals("white") && pawn.enpassant == true)
+						if (pawn.color.equals("black") && pawn.enpassant == true)
 						{
-							Board.board[row2][col2] = this;
+							Board.board[row1][col1] = null;
 							Board.board[row1][col2] = null;
-							moved = true;
-							return true;
+							Board.board[row2][col2] = this;
+							if (Board.check(color))
+							{
+								Board.board[row1][col1] = this;
+								Board.board[row1][col2] = piece;
+								Board.board[row2][col2] = null;
+								return false;
+							}
+							else
+							{
+								return true;
+							}
 						}
 					}
 				}
 				else // regular
 				{
-					Board.board[row2][col2] = this;
+					Piece piece = Board.board[row2][col2];
 					Board.board[row1][col1] = null;
-					moved = true;
-					if (row2 == 0)if (row2 == 0)
+					Board.board[row2][col2] = this;
+					if (row2 == 0)
 					{
 						if (promote(input) == false)
 						{
 							return false;
 						}
+						else
+						{
+							return true;
+						}
 					}
-					return true;
+					if (Board.check(color))
+					{
+						Board.board[row1][col1] = this;
+						Board.board[row2][col2] = piece;
+						return false;
+					}
+					else
+					{
+						moved = true;
+						return true;
+					}
 				}
 			}
 		}
@@ -180,26 +254,26 @@ public class Pawn extends Piece
 			switch (c)
 			{
 				case 'R':
-					Board.board[row2][col2] = new Rook(this.color);
 					Board.board[row1][col1] = null;
+					Board.board[row2][col2] = new Rook(color);
 					break;
 				case 'N':
-					Board.board[row2][col2] = new Knight(this.color);
 					Board.board[row1][col1] = null;
+					Board.board[row2][col2] = new Knight(color);
 					break;
 				case 'B':
-					Board.board[row2][col2] = new Bishop(this.color);
 					Board.board[row1][col1] = null;
+					Board.board[row2][col2] = new Bishop(color);
 					break;
 				default:
-					Board.board[row2][col2] = new Queen(this.color);
 					Board.board[row1][col1] = null;
+					Board.board[row2][col2] = new Queen(color);
 			}
 		}
 		else
 		{
-			Board.board[row2][col2] = new Queen(this.color);
 			Board.board[row1][col1] = null;
+			Board.board[row2][col2] = new Queen(color);
 		}
 		if (Board.check(color))
 		{

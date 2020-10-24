@@ -87,7 +87,7 @@ public class Chess
 		Board.make_board();
 		Board.initialize_board();
 		
-		read_from_file();
+		// read_from_file();
 		
 		Scanner sc = new Scanner(System.in);
 		while (!game_over)
