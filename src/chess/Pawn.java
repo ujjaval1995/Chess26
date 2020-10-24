@@ -193,20 +193,4 @@ public class Pawn extends Piece
 		}
 		return true;
 	}
-	
-	public boolean[][] get_moves(int row, int col)
-	{
-		boolean arr[][] = new boolean[8][8];
-		{
-			for (boolean[] i : arr)
-			{
-				Arrays.fill(i, false);
-			}
-		}
-		
-		
-		
-		return arr;
-	}
-	
 }

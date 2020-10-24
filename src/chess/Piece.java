@@ -22,5 +22,4 @@ public abstract class Piece
 	}
 	
 	public abstract boolean move(String input);
-	public abstract boolean[][] get_moves(int row, int col);
 }

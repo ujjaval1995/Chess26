@@ -130,27 +130,31 @@ public class Board
 	{
 		String other = color.equals("white") ? "black" : "white";
 		
+		Piece king = Board.board[0][0];
 		int x=0, y=0;
 		for (; x<8; x++)
 		{
 			for (; y<8; y++)
 			{
-				Piece piece = Board.board[x][y];
-				if (piece != null && piece instanceof King && piece.color.equals(color))
+				king = Board.board[x][y];
+				if (king != null && king instanceof King && king.color.equals(color))
 				{
 					break;
 				}
 			}
 		}
+		Piece attacker = null;
 		for (int i=0; i<8; i++)
 		{
 			for (int j=0; j<8; j++)
 			{
-				Piece piece = Board.board[i][j];
-				if (piece != null && piece.color.equals(other))
+				attacker = Board.board[i][j];
+				if (attacker != null && attacker.color.equals(other))
 				{
-					if (piece.get_moves(i, j)[x][y] == true)
+					if (attacker.move(col_to_file(j) + row_to_rank(i) + " " + col_to_file(y) + row_to_rank(x)) == true)
 					{
+						Board.board[x][y] = king;
+						Board.board[i][j] = attacker;
 						return true;
 					}
 				}
