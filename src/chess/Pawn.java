@@ -35,7 +35,13 @@ public class Pawn extends Piece
 					Board.board[row2][col2] = this;
 					Board.board[row1][col1] = null;
 					moved = true;
-					if (row2 == 7) promote(input);
+					if (row2 == 7)
+					{
+						if (promote(input) == false)
+						{
+							return false;
+						}
+					}
 					return true;
 				}
 				else if (row1-2 == row2 && Board.board[row1-1][col2] == null && !moved) // move 2
@@ -69,7 +75,13 @@ public class Pawn extends Piece
 					Board.board[row2][col2] = this;
 					Board.board[row1][col1] = null;
 					moved = true;
-					if (row2 == 7) promote(input);
+					if (row2 == 7)
+					{
+						if (promote(input) == false)
+						{
+							return false;
+						}
+					}
 					return true;
 				}
 			}
@@ -83,7 +95,13 @@ public class Pawn extends Piece
 					Board.board[row2][col2] = this;
 					Board.board[row1][col1] = null;
 					moved = true;
-					if (row2 == 0) promote(input);
+					if (row2 == 0)
+					{
+						if (promote(input) == false)
+						{
+							return false;
+						}
+					}
 					return true;
 				}
 				else if (row1+2 == row2 && Board.board[row1+1][col2] == null && !moved) // move 2
@@ -117,7 +135,13 @@ public class Pawn extends Piece
 					Board.board[row2][col2] = this;
 					Board.board[row1][col1] = null;
 					moved = true;
-					if (row2 == 0) promote(input);
+					if (row2 == 0)if (row2 == 0)
+					{
+						if (promote(input) == false)
+						{
+							return false;
+						}
+					}
 					return true;
 				}
 			}
@@ -125,12 +149,14 @@ public class Pawn extends Piece
 		return false;
 	}
 	
-	public void promote(String input)
+	public boolean promote(String input)
 	{
 		int col1 = Board.file_to_col(input.charAt(0));
 		int row1 = Board.rank_to_row(input.charAt(1));
 		int col2 = Board.file_to_col(input.charAt(3));
 		int row2 = Board.rank_to_row(input.charAt(4));
+		Piece p1 = Board.board[row1][col1];
+		Piece p2 = Board.board[row2][col2];
 		
 		if (input.length() >= 7)
 		{
@@ -159,6 +185,13 @@ public class Pawn extends Piece
 			Board.board[row2][col2] = new Queen(this.color);
 			Board.board[row1][col1] = null;
 		}
+		if (Board.check(color))
+		{
+			Board.board[row1][col1] = p1;
+			Board.board[row2][col2] = p2;
+			return false;
+		}
+		return true;
 	}
 	
 	public boolean[][] get_moves(int row, int col)
