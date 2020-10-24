@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.Arrays;
+
 public class Pawn extends Piece
 {
 	boolean moved;
@@ -159,9 +161,18 @@ public class Pawn extends Piece
 		}
 	}
 	
-	public boolean[][] get_moves()
+	public boolean[][] get_moves(int row, int col)
 	{
 		boolean arr[][] = new boolean[8][8];
+		{
+			for (boolean[] i : arr)
+			{
+				Arrays.fill(i, false);
+			}
+		}
+		
+		
+		
 		return arr;
 	}
 	

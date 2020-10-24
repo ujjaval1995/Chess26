@@ -108,7 +108,7 @@ public class Board
 					{
 						for (int y=0; y<8; y++)
 						{
-							if (piece.get_moves()[x][y] == true)
+							if (piece.get_moves(i, j)[x][y] == true)
 							{
 								Piece piece2 = Board.board[x][y];
 								if (piece2 != null && piece2 instanceof King && piece2.color.equals(color))
