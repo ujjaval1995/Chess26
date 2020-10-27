@@ -138,7 +138,7 @@ public class Board
 			for (y=0; y<8; y++)
 			{
 				king = Board.board[x][y];
-				if (king != null && king instanceof King && king.color.equals(color))
+				if (king != null && king instanceof King && king.hasColor(color))
 				{
 					flag = true;
 					break;
@@ -155,7 +155,7 @@ public class Board
 			for (int j=0; j<8; j++)
 			{
 				attacker = Board.board[i][j];
-				if (attacker != null && attacker.color.equals(other))
+				if (attacker != null && attacker.hasColor(other))
 				{
 					if (attacker.move(col_to_file(j) + "" + row_to_rank(i) + " " + col_to_file(y) + "" + row_to_rank(x)) == true)
 					{

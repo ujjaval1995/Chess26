@@ -6,7 +6,14 @@ public abstract class Piece
 	
 	Piece(String color)
 	{
-		this.color = color;
+		if (color.equals("white"))
+		{
+			this.color = color;
+		}
+		else
+		{
+			this.color = "black";
+		}
 	}
 	
 	public String toString()
