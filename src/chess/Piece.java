@@ -21,5 +21,29 @@ public abstract class Piece
 		}
 	}
 	
+	public String getColor()
+	{
+		if (this.color.equals("white"))
+		{
+			return "white";
+		}
+		else
+		{
+			return "black";
+		}
+	}
+	
+	public String getOtherColor()
+	{
+		if (this.color.equals("white"))
+		{
+			return "black";
+		}
+		else
+		{
+			return "white";
+		}
+	}
+	
 	public abstract boolean move(String input);
 }
