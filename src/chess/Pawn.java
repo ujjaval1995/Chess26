@@ -98,9 +98,13 @@ public class Pawn extends Piece
 								return true;
 							}
 						}
+						else
+						{
+							return false;
+						}
 					}
 				}
-				else // regular
+				else if (Board.board[row2][col2].color.equals("black")) // regular
 				{
 					Piece piece = Board.board[row2][col2];
 					Board.board[row1][col1] = null;
@@ -127,6 +131,10 @@ public class Pawn extends Piece
 						moved = true;
 						return true;
 					}
+				}
+				else
+				{
+					return false;
 				}
 			}
 		}
@@ -204,9 +212,13 @@ public class Pawn extends Piece
 								return true;
 							}
 						}
+						else
+						{
+							return false;
+						}
 					}
 				}
-				else // regular
+				else if (Board.board[row2][col2].color.equals("white")) // regular
 				{
 					Piece piece = Board.board[row2][col2];
 					Board.board[row1][col1] = null;
@@ -233,6 +245,10 @@ public class Pawn extends Piece
 						moved = true;
 						return true;
 					}
+				}
+				else
+				{
+					return false;
 				}
 			}
 		}
