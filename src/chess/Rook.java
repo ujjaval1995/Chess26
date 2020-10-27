@@ -14,6 +14,6 @@ public class Rook extends Piece
 
 	public boolean move(String input)
 	{
-		return false;
+		return move_straight(input);
 	}
 }

@@ -165,6 +165,37 @@ public abstract class Piece
 	
 	public boolean move_diagonal(String input)
 	{
+		int col1 = Board.file_to_col(input.charAt(0));
+		int row1 = Board.rank_to_row(input.charAt(1));
+		int col2 = Board.file_to_col(input.charAt(3));
+		int row2 = Board.rank_to_row(input.charAt(4));
+		
+		if (row1 == row2 || col1 == col2)
+		{
+			return false;
+		}
+		
+		if (row1 + col1 == row2 + col2) // diagonal /
+		{
+			
+		}
+		else if (row1 + (7-col1) == row2 + (7-col2)) // diagonal \
+		{
+			
+		}
+		else
+		{
+			return false;
+		}
+		
+		int minrow = Math.min(row1, row2);
+		int maxrow = Math.max(row1, row2);
+		int mincol = Math.min(col1, col2);
+		int maxcol = Math.max(col1, col2);
+		
+		int path = 0;
+		
+		
 		return false;
 	}
 }

@@ -14,6 +14,6 @@ public class Queen extends Piece
 
 	public boolean move(String input)
 	{
-		return false;
+		return (move_straight(input) || move_diagonal(input));
 	}
 }

@@ -14,6 +14,6 @@ public class Bishop extends Piece
 
 	public boolean move(String input)
 	{
-		return false;
+		return move_diagonal(input);
 	}
 }
