@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Chess
 {
 	static String turn = "white";
+	static String winner = null;
 	static int turn_count = 0;
 	static boolean game_over = false;
 	
@@ -52,6 +53,18 @@ public class Chess
 			}
 		}
 		turn_count++;
+	}
+	
+	static void end_game()
+	{
+		if (turn.equals("white"))
+		{
+			System.out.print("White wins");
+		}
+		else
+		{
+			System.out.print("Black wins");
+		}
 	}
 	
 	static void read_from_file()
@@ -101,6 +114,10 @@ public class Chess
 				print_turn();
 				input = sc.nextLine();
 				
+				if (input.equals("resign"))
+				{
+					game_over = true;
+				}
 				if (input.length() < 5)
 				{
 					System.out.println("Invalid input, try again");
@@ -126,11 +143,11 @@ public class Chess
 					System.out.println("Illegal move, try again");
 				}
 			}
-			
 			System.out.println();
 			change_turn();
 			increment_turn_count();
 		}
 		sc.close();
+		end_game();
 	}
 }
