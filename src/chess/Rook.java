@@ -35,24 +35,18 @@ public class Rook extends Piece
 					return false;
 				}
 			}
-			if (Board.board[row1][col2] != null) // move
+			Piece piece = Board.board[row2][col2];
+			Board.board[row1][col1] = null;
+			Board.board[row2][col2] = this;
+			if (Board.check(color))
 			{
-				Board.board[row1][col1] = null;
-				Board.board[row2][col2] = this;
-				if (Board.check(color))
-				{
-					Board.board[row1][col1] = this;
-					Board.board[row2][col2] = null;
-					return false;
-				}
-				else
-				{
-					return true;
-				}
+				Board.board[row1][col1] = this;
+				Board.board[row2][col2] = null;
+				return false;
 			}
-			else // capture
+			else
 			{
-				
+				return true;
 			}
 		}
 		else if (row1 != row2 && col1 == col2) // vertical
