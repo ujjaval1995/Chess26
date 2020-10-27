@@ -43,7 +43,7 @@ public class Chess
 				Piece piece = Board.board[i][j];
 				if (piece != null && piece instanceof Pawn)
 				{
-					if (turn.equals(piece.color))
+					if (turn.equals(piece.getColor()))
 					{
 						Pawn pawn = (Pawn) piece;
 						pawn.enpassant = false;

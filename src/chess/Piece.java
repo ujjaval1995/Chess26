@@ -45,5 +45,17 @@ public abstract class Piece
 		}
 	}
 	
+	public boolean hasColor(String color)
+	{
+		if (this.color.equals(color))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	public abstract boolean move(String input);
 }
