@@ -7,8 +7,8 @@ import java.util.Scanner;
 public class Chess
 {
 	static String turn = "white";
-	static String winner = null;
 	static int turn_count = 0;
+	static boolean draw = false;
 	static boolean game_over = false;
 	
 	static void print_turn()
@@ -57,13 +57,16 @@ public class Chess
 	
 	static void end_game()
 	{
-		if (turn.equals("white"))
+		if (!draw)
 		{
-			System.out.print("White wins");
-		}
-		else
-		{
-			System.out.print("Black wins");
+			if (turn.equals("white"))
+			{
+				System.out.print("White wins");
+			}
+			else
+			{
+				System.out.print("Black wins");
+			}
 		}
 	}
 	
@@ -117,8 +120,14 @@ public class Chess
 				if (input.equals("resign"))
 				{
 					game_over = true;
+					break;
 				}
-				if (input.length() < 5)
+				else if (draw && input.equals("draw"))
+				{
+					game_over = true;
+					break;
+				}
+				else if (input.length() < 5)
 				{
 					System.out.println("Invalid input, try again");
 					continue;
@@ -136,11 +145,20 @@ public class Chess
 				}
 				if (Board.board[row1][col1] != null && Board.board[row1][col1].move(input) == true)
 				{
+					draw = false;
+					if (input.length() >= 11)
+					{
+						if (input.substring(input.length()-5).equals("draw?"))
+						{
+							draw = true;
+						}
+					}
 					break;
 				}
 				else
 				{
 					System.out.println("Illegal move, try again");
+					continue;
 				}
 			}
 			System.out.println();
