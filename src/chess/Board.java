@@ -128,8 +128,6 @@ public class Board
 	
 	static boolean check(String color)
 	{
-		String other = color.equals("white") ? "black" : "white";
-		
 		Piece king = Board.board[0][0];
 		int x=0, y=0;
 		boolean flag = false;
@@ -155,9 +153,9 @@ public class Board
 			for (int j=0; j<8; j++)
 			{
 				attacker = Board.board[i][j];
-				if (attacker != null && attacker.hasColor(other))
+				if (attacker != null && !attacker.hasColor(color))
 				{
-					if (attacker.move(col_to_file(j) + "" + row_to_rank(i) + " " + col_to_file(y) + "" + row_to_rank(x)) == true)
+					if (attacker.move(col_to_file(j) + "" + row_to_rank(i) + " " + col_to_file(y) + "" + row_to_rank(x)))
 					{
 						Board.board[x][y] = king;
 						Board.board[i][j] = attacker;
@@ -172,7 +170,27 @@ public class Board
 	
 	static boolean checkmate(String color)
 	{
-		// COMPLETE
-		return false;
+		for (int i=0; i<8; i++)
+		{
+			for (int j=0; j<8; j++)
+			{
+				Piece piece = Board.board[i][j];
+				if (piece != null && piece.hasColor(color))
+				{
+					for (int x=0; x<8; x++)
+					{
+						for (int y=0; y<8; y++)
+						{
+							if (piece.move(col_to_file(j) + "" + row_to_rank(i) + " " + col_to_file(y) + "" + row_to_rank(x)))
+							{
+								return false;
+							}
+						}
+					}
+					
+				}
+			}
+		}
+		return true;
 	}
 }
