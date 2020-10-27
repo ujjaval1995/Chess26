@@ -64,9 +64,58 @@ public abstract class Piece
 		}
 	}
 	
+	// COMPLETE
+	// add boolean parameter in all move functions for move vs can_move
+	// change (String input) to (int row1, int col1, int row2, int col2) where possible
+	
 	public abstract boolean move(String input);
 	
-	// public abstract boolean can_move(String input);
+	public boolean regular_move(int row1, int col1, int row2, int col2)
+	{
+		if (Board.board[row2][col2] == null) // move
+		{
+			Board.board[row1][col1] = null;
+			Board.board[row2][col2] = this;
+			if (Board.check(color))
+			{
+				Board.board[row1][col1] = this;
+				Board.board[row2][col2] = null;
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public boolean capture_move(int row1, int col1, int row2, int col2)
+	{		
+		if (!Board.board[row2][col2].hasColor(color)) // capture
+		{
+			Piece piece = Board.board[row2][col2];
+			Board.board[row1][col1] = null;
+			Board.board[row2][col2] = this;
+			if (Board.check(color))
+			{
+				Board.board[row1][col1] = this;
+				Board.board[row2][col2] = piece;
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
 	
 	public boolean move_straight(String input)
 	{
@@ -107,38 +156,7 @@ public abstract class Piece
 		{
 			return false;
 		}
-		if (Board.board[row2][col2] == null) // move
-		{
-			Board.board[row1][col1] = null;
-			Board.board[row2][col2] = this;
-			if (Board.check(color))
-			{
-				Board.board[row1][col1] = this;
-				Board.board[row2][col2] = null;
-				return false;
-			}
-			else
-			{
-				return true;
-			}
-		}
-		else if (!Board.board[row2][col2].hasColor(color)) // capture
-		{
-			Piece piece = Board.board[row2][col2];
-			Board.board[row1][col1] = null;
-			Board.board[row2][col2] = this;
-			if (Board.check(color))
-			{
-				Board.board[row1][col1] = this;
-				Board.board[row2][col2] = piece;
-				return false;
-			}
-			else
-			{
-				return true;
-			}
-		}
-		return false;
+		return (regular_move(row1, col1, row2, col2) || capture_move(row1, col1, row2, col2));
 	}
 	
 	public boolean move_diagonal(String input)
@@ -204,31 +222,6 @@ public abstract class Piece
 		{
 			return false;
 		}
-		if (Board.board[row2][col2] == null) // move
-		{
-			Board.board[row1][col1] = null;
-			Board.board[row2][col2] = this;
-			if (Board.check(color))
-			{
-				Board.board[row1][col1] = this;
-				Board.board[row2][col2] = null;
-			}
-			else
-			{
-				return true;
-			}
-		}
-		else if (!Board.board[row2][col2].hasColor(color)) // capture
-		{
-			Piece piece = Board.board[row2][col2];
-			Board.board[row1][col1] = null;
-			Board.board[row2][col2] = this;
-			if (Board.check(color))
-			{
-				Board.board[row1][col1] = this;
-				Board.board[row2][col2] = piece;
-			}
-		}
-		return false;
+		return (regular_move(row1, col1, row2, col2) || capture_move(row1, col1, row2, col2));
 	}
 }

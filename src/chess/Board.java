@@ -170,4 +170,9 @@ public class Board
 		return false;
 	}
 	
+	static boolean checkmate(String color)
+	{
+		// COMPLETE
+		return false;
+	}
 }

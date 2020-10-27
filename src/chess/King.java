@@ -14,6 +14,19 @@ public class King extends Piece
 
 	public boolean move(String input)
 	{
+		// COMPLETE
+		return false;
+	}
+	
+	public boolean move_1(String input)
+	{
+		// COMPLETE
+		return false;
+	}
+	
+	public boolean castle(String input)
+	{
+		// COMPLETE
 		return false;
 	}
 }
