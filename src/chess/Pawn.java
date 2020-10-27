@@ -24,7 +24,7 @@ public class Pawn extends Piece
 		int col2 = Board.file_to_col(input.charAt(3));
 		int row2 = Board.rank_to_row(input.charAt(4));
 		
-		if (color.equals("white"))
+		if (this.hasColor("white"))
 		{
 			if (col1 == col2 && Board.board[row2][col2] == null) // move
 			{
@@ -43,7 +43,7 @@ public class Pawn extends Piece
 							return true;
 						}
 					}
-					if (Board.check(color))
+					if (Board.check(this.getColor()))
 					{
 						Board.board[row1][col1] = this;
 						Board.board[row2][col2] = null;
@@ -59,7 +59,7 @@ public class Pawn extends Piece
 				{
 					Board.board[row1][col1] = null;
 					Board.board[row2][col2] = this;
-					if (Board.check(color))
+					if (Board.check(this.getColor()))
 					{
 						Board.board[row1][col1] = this;
 						Board.board[row2][col2] = null;
@@ -81,12 +81,12 @@ public class Pawn extends Piece
 					if (piece != null && piece instanceof Pawn)
 					{
 						Pawn pawn = (Pawn) piece;
-						if (pawn.color.equals("black") && pawn.enpassant == true)
+						if (pawn.hasColor("black") && pawn.enpassant == true)
 						{
 							Board.board[row1][col1] = null;
 							Board.board[row1][col2] = null;
 							Board.board[row2][col2] = this;
-							if (Board.check(color))
+							if (Board.check(this.getColor()))
 							{
 								Board.board[row1][col1] = this;
 								Board.board[row1][col2] = piece;
@@ -104,7 +104,7 @@ public class Pawn extends Piece
 						}
 					}
 				}
-				else if (Board.board[row2][col2].color.equals("black")) // regular
+				else if (Board.board[row2][col2].hasColor("black")) // regular
 				{
 					Piece piece = Board.board[row2][col2];
 					Board.board[row1][col1] = null;
@@ -120,7 +120,7 @@ public class Pawn extends Piece
 							return true;
 						}
 					}
-					if (Board.check(color))
+					if (Board.check(this.getColor()))
 					{
 						Board.board[row1][col1] = this;
 						Board.board[row2][col2] = piece;
@@ -157,7 +157,7 @@ public class Pawn extends Piece
 							return true;
 						}
 					}
-					if (Board.check(color))
+					if (Board.check(this.getColor()))
 					{
 						Board.board[row1][col1] = this;
 						Board.board[row2][col2] = null;
@@ -173,7 +173,7 @@ public class Pawn extends Piece
 				{
 					Board.board[row1][col1] = null;
 					Board.board[row2][col2] = this;
-					if (Board.check(color))
+					if (Board.check(this.getColor()))
 					{
 						Board.board[row1][col1] = this;
 						Board.board[row2][col2] = null;
@@ -195,12 +195,12 @@ public class Pawn extends Piece
 					if (piece != null && piece instanceof Pawn)
 					{
 						Pawn pawn = (Pawn) piece;
-						if (pawn.color.equals("black") && pawn.enpassant == true)
+						if (pawn.hasColor("black") && pawn.enpassant == true)
 						{
 							Board.board[row1][col1] = null;
 							Board.board[row1][col2] = null;
 							Board.board[row2][col2] = this;
-							if (Board.check(color))
+							if (Board.check(this.getColor()))
 							{
 								Board.board[row1][col1] = this;
 								Board.board[row1][col2] = piece;
@@ -218,7 +218,7 @@ public class Pawn extends Piece
 						}
 					}
 				}
-				else if (Board.board[row2][col2].color.equals("white")) // regular
+				else if (Board.board[row2][col2].hasColor("white")) // regular
 				{
 					Piece piece = Board.board[row2][col2];
 					Board.board[row1][col1] = null;
@@ -234,7 +234,7 @@ public class Pawn extends Piece
 							return true;
 						}
 					}
-					if (Board.check(color))
+					if (Board.check(this.getColor()))
 					{
 						Board.board[row1][col1] = this;
 						Board.board[row2][col2] = piece;
@@ -271,27 +271,27 @@ public class Pawn extends Piece
 			{
 				case 'R':
 					Board.board[row1][col1] = null;
-					Board.board[row2][col2] = new Rook(color);
+					Board.board[row2][col2] = new Rook(this.getColor());
 					break;
 				case 'N':
 					Board.board[row1][col1] = null;
-					Board.board[row2][col2] = new Knight(color);
+					Board.board[row2][col2] = new Knight(this.getColor());
 					break;
 				case 'B':
 					Board.board[row1][col1] = null;
-					Board.board[row2][col2] = new Bishop(color);
+					Board.board[row2][col2] = new Bishop(this.getColor());
 					break;
 				default:
 					Board.board[row1][col1] = null;
-					Board.board[row2][col2] = new Queen(color);
+					Board.board[row2][col2] = new Queen(this.getColor());
 			}
 		}
 		else
 		{
 			Board.board[row1][col1] = null;
-			Board.board[row2][col2] = new Queen(color);
+			Board.board[row2][col2] = new Queen(this.getColor());
 		}
-		if (Board.check(color))
+		if (Board.check(this.getColor()))
 		{
 			Board.board[row1][col1] = p1;
 			Board.board[row2][col2] = p2;
