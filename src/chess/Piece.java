@@ -66,6 +66,8 @@ public abstract class Piece
 	
 	public abstract boolean move(String input);
 	
+	// public abstract boolean can_move(String input);
+	
 	public boolean move_straight(String input)
 	{
 		int col1 = Board.file_to_col(input.charAt(0));
@@ -77,9 +79,9 @@ public abstract class Piece
 		{
 			int min = Math.min(col1, col2);
 			int max = Math.max(col1, col2);
-			for (int i=min+1; i<max; i++) // clear path
+			for (int j=min+1; j<max; j++) // clear path
 			{
-				if (Board.board[row1][i] != null)
+				if (Board.board[row1][j] != null)
 				{
 					return false;
 				}
@@ -170,30 +172,73 @@ public abstract class Piece
 		int col2 = Board.file_to_col(input.charAt(3));
 		int row2 = Board.rank_to_row(input.charAt(4));
 		
-		if (row1 == row2 || col1 == col2)
+		boolean found = false;
+		
+		if (row1 == row2 || col1 == col2) // horizontal or vertical
 		{
 			return false;
 		}
-		
-		if (row1 + col1 == row2 + col2) // diagonal /
+		else if (row1 + col1 == row2 + col2) // diagonal /
 		{
-			
+			int minrow = Math.min(row1, row2);
+			if (row1 == minrow) // down-left
+			{
+				for (int i=row1+1, j=col1-1; i<=row2; i++, j--) // clear path
+				{
+					if (i == row2 && j == col2)
+					{
+						found = true;
+					}
+				}
+			}
+			else // up-right
+			{
+				for (int i=row2+1, j=col2-1; i<=row1; i++, j--) // clear path
+				{
+					if (i == row1 && j == col1)
+					{
+						found = true;
+					}
+				}
+			}
 		}
 		else if (row1 + (7-col1) == row2 + (7-col2)) // diagonal \
 		{
-			
+			int minrow = Math.min(row1, row2);
+			if (row1 == minrow) // down-right
+			{
+				for (int i=row1+1, j=col1+1; i<=row2; i++, j++) // clear path
+				{
+					if (i == row2 && j == col2)
+					{
+						found = true;
+					}
+				}
+			}
+			else // up-left
+			{
+				for (int i=row2+1, j=col2+1; i<=row1; i++, j++) // clear path
+				{
+					if (i == row1 && j == col1)
+					{
+						found = true;
+					}
+				}
+			}
 		}
 		else
 		{
 			return false;
+		}
+		if (found)
+		{
+			
 		}
 		
 		int minrow = Math.min(row1, row2);
 		int maxrow = Math.max(row1, row2);
 		int mincol = Math.min(col1, col2);
 		int maxcol = Math.max(col1, col2);
-		
-		int path = 0;
 		
 		
 		return false;
