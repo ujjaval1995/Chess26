@@ -75,7 +75,11 @@ public abstract class Piece
 		int col2 = Board.file_to_col(input.charAt(3));
 		int row2 = Board.rank_to_row(input.charAt(4));
 		
-		if (row1 == row2 && col1 != col2) // horizontal
+		if (row1 == row2 && col1 == col2) // same
+		{
+			return false;
+		}
+		else if (row1 == row2 && col1 != col2) // horizontal
 		{
 			int min = Math.min(col1, col2);
 			int max = Math.max(col1, col2);
@@ -86,38 +90,6 @@ public abstract class Piece
 					return false;
 				}
 			}
-			if (Board.board[row2][col2] == null) // move
-			{
-				Board.board[row1][col1] = null;
-				Board.board[row2][col2] = this;
-				if (Board.check(color))
-				{
-					Board.board[row1][col1] = this;
-					Board.board[row2][col2] = null;
-					return false;
-				}
-				else
-				{
-					return true;
-				}
-			}
-			else if (!Board.board[row2][col2].hasColor(color)) // capture
-			{
-				Piece piece = Board.board[row2][col2];
-				Board.board[row1][col1] = null;
-				Board.board[row2][col2] = this;
-				if (Board.check(color))
-				{
-					Board.board[row1][col1] = this;
-					Board.board[row2][col2] = piece;
-					return false;
-				}
-				else
-				{
-					return true;
-				}
-			}
-			
 		}
 		else if (row1 != row2 && col1 == col2) // vertical
 		{
@@ -130,36 +102,40 @@ public abstract class Piece
 					return false;
 				}
 			}
-			if (Board.board[row2][col2] == null) // move
+		}
+		else // not same, horizontal, vertical
+		{
+			return false;
+		}
+		if (Board.board[row2][col2] == null) // move
+		{
+			Board.board[row1][col1] = null;
+			Board.board[row2][col2] = this;
+			if (Board.check(color))
 			{
-				Board.board[row1][col1] = null;
-				Board.board[row2][col2] = this;
-				if (Board.check(color))
-				{
-					Board.board[row1][col1] = this;
-					Board.board[row2][col2] = null;
-					return false;
-				}
-				else
-				{
-					return true;
-				}
+				Board.board[row1][col1] = this;
+				Board.board[row2][col2] = null;
+				return false;
 			}
-			else if (!Board.board[row2][col2].hasColor(color)) // capture
+			else
 			{
-				Piece piece = Board.board[row2][col2];
-				Board.board[row1][col1] = null;
-				Board.board[row2][col2] = this;
-				if (Board.check(color))
-				{
-					Board.board[row1][col1] = this;
-					Board.board[row2][col2] = piece;
-					return false;
-				}
-				else
-				{
-					return true;
-				}
+				return true;
+			}
+		}
+		else if (!Board.board[row2][col2].hasColor(color)) // capture
+		{
+			Piece piece = Board.board[row2][col2];
+			Board.board[row1][col1] = null;
+			Board.board[row2][col2] = this;
+			if (Board.check(color))
+			{
+				Board.board[row1][col1] = this;
+				Board.board[row2][col2] = piece;
+				return false;
+			}
+			else
+			{
+				return true;
 			}
 		}
 		return false;
@@ -172,9 +148,7 @@ public abstract class Piece
 		int col2 = Board.file_to_col(input.charAt(3));
 		int row2 = Board.rank_to_row(input.charAt(4));
 		
-		boolean found = false;
-		
-		if (row1 == row2 || col1 == col2) // horizontal or vertical
+		if (row1 == row2 || col1 == col2) // same, horizontal, vertical
 		{
 			return false;
 		}
@@ -183,21 +157,21 @@ public abstract class Piece
 			int minrow = Math.min(row1, row2);
 			if (row1 == minrow) // down-left
 			{
-				for (int i=row1+1, j=col1-1; i<=row2; i++, j--) // clear path
+				for (int i=row1+1, j=col1-1; i<row2; i++, j--) // clear path
 				{
-					if (i == row2 && j == col2)
+					if (Board.board[i][j] != null)
 					{
-						found = true;
+						return false;
 					}
 				}
 			}
 			else // up-right
 			{
-				for (int i=row2+1, j=col2-1; i<=row1; i++, j--) // clear path
+				for (int i=row2+1, j=col2-1; i<row1; i++, j--) // clear path
 				{
-					if (i == row1 && j == col1)
+					if (Board.board[i][j] != null)
 					{
-						found = true;
+						return false;
 					}
 				}
 			}
@@ -207,40 +181,54 @@ public abstract class Piece
 			int minrow = Math.min(row1, row2);
 			if (row1 == minrow) // down-right
 			{
-				for (int i=row1+1, j=col1+1; i<=row2; i++, j++) // clear path
+				for (int i=row1+1, j=col1+1; i<row2; i++, j++) // clear path
 				{
-					if (i == row2 && j == col2)
+					if (Board.board[i][j] != null)
 					{
-						found = true;
+						return false;
 					}
 				}
 			}
 			else // up-left
 			{
-				for (int i=row2+1, j=col2+1; i<=row1; i++, j++) // clear path
+				for (int i=row2+1, j=col2+1; i<row1; i++, j++) // clear path
 				{
-					if (i == row1 && j == col1)
+					if (Board.board[i][j] != null)
 					{
-						found = true;
+						return false;
 					}
 				}
 			}
 		}
-		else
+		else // not same, horizontal, vertical, diagonal
 		{
 			return false;
 		}
-		if (found)
+		if (Board.board[row2][col2] == null) // move
 		{
-			
+			Board.board[row1][col1] = null;
+			Board.board[row2][col2] = this;
+			if (Board.check(color))
+			{
+				Board.board[row1][col1] = this;
+				Board.board[row2][col2] = null;
+			}
+			else
+			{
+				return true;
+			}
 		}
-		
-		int minrow = Math.min(row1, row2);
-		int maxrow = Math.max(row1, row2);
-		int mincol = Math.min(col1, col2);
-		int maxcol = Math.max(col1, col2);
-		
-		
+		else if (!Board.board[row2][col2].hasColor(color)) // capture
+		{
+			Piece piece = Board.board[row2][col2];
+			Board.board[row1][col1] = null;
+			Board.board[row2][col2] = this;
+			if (Board.check(color))
+			{
+				Board.board[row1][col1] = this;
+				Board.board[row2][col2] = piece;
+			}
+		}
 		return false;
 	}
 }
