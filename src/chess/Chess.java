@@ -83,7 +83,7 @@ public class Chess
 		{
 			try
 			{
-			      File file = new File("test_cases/ex_res_w.txt");
+			      File file = new File("test_cases/ex1.txt");
 			      fsc = new Scanner(file);
 			}
 			catch (FileNotFoundException e)

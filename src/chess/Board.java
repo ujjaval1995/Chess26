@@ -157,7 +157,7 @@ public class Board
 				{
 					if (attacker.move(col_to_file(j) + "" + row_to_rank(i) + " " + col_to_file(y) + "" + row_to_rank(x), false))
 					{
-						// System.out.println(color + " in check by " + col_to_file(j) + row_to_rank(i));
+						System.out.println(color + " in check by " + col_to_file(j) + row_to_rank(i));
 						return true;
 					}
 				}
@@ -181,6 +181,7 @@ public class Board
 						{
 							if (piece.move(col_to_file(j) + "" + row_to_rank(i) + " " + col_to_file(y) + "" + row_to_rank(x), false))
 							{
+								
 								return false;
 							}
 						}
