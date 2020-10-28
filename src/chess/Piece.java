@@ -40,18 +40,6 @@ public abstract class Piece
 		}
 	}
 	
-	public String getOtherColor()
-	{
-		if (this.color.equals("white"))
-		{
-			return "black";
-		}
-		else
-		{
-			return "white";
-		}
-	}
-	
 	public boolean hasColor(String color)
 	{
 		if (this.color.equals(color))
