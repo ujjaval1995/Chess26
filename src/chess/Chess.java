@@ -11,6 +11,8 @@ public class Chess
 	static boolean draw = false;
 	static boolean game_over = false;
 	
+	static boolean test = true;
+	
 	static void print_turn()
 	{
 		if (turn.equals("white"))
@@ -69,43 +71,28 @@ public class Chess
 			}
 		}
 	}
-	
-	static void read_from_file()
-	{
-		try
-		{
-		      File file = new File("src/game1.txt");
-		      Scanner sc = new Scanner(file);
-		      while (sc.hasNextLine())
-		      {
-		    	  Board.print_board();
-		    	  print_turn();
-		    	  
-		    	  String input = sc.nextLine();
-		    	  System.out.println(input);
-		    	  
-		    	  System.out.println();
-		    	  change_turn();
-		    	  increment_turn_count();
-		      }
-		     sc.close();
-		}
-		catch (FileNotFoundException e)
-		{
-		      System.out.println("An error occurred.");
-		      e.printStackTrace();
-		}
-		game_over = true;
-	}
 
 	public static void main(String[] args)
 	{
 		Board.make_board();
 		Board.initialize_board();
-		
-		// read_from_file();
-		
 		Scanner sc = new Scanner(System.in);
+		Scanner fsc = null;
+		
+		if (test)
+		{
+			try
+			{
+			      File file = new File("src/game1.txt");
+			      fsc = new Scanner(file);
+			}
+			catch (FileNotFoundException e)
+			{
+			      System.out.println("An error occurred.");
+			      e.printStackTrace();
+			}
+		}
+		
 		while (!game_over)
 		{	
 			Board.print_board();
@@ -127,8 +114,16 @@ public class Chess
 			while (true)
 			{
 				print_turn();
-				input = sc.nextLine();
 				
+				if (test && fsc.hasNextLine())
+				{
+					input = fsc.nextLine();
+					System.out.println(input);
+				}
+				else
+				{
+					input = sc.nextLine();
+				}
 				if (input.equals("resign"))
 				{
 					game_over = true;
@@ -176,6 +171,10 @@ public class Chess
 			System.out.println();
 			change_turn();
 			increment_turn_count();
+		}
+		if (test)
+		{
+			fsc.close();
 		}
 		sc.close();
 		end_game();
