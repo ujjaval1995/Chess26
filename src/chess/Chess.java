@@ -83,7 +83,7 @@ public class Chess
 		{
 			try
 			{
-			      File file = new File("src/game1.txt");
+			      File file = new File("test_cases/ex_res_w.txt");
 			      fsc = new Scanner(file);
 			}
 			catch (FileNotFoundException e)
@@ -168,7 +168,10 @@ public class Chess
 					continue;
 				}
 			}
-			System.out.println();
+			if (!game_over)
+			{
+				System.out.println();
+			}
 			change_turn();
 			increment_turn_count();
 		}
