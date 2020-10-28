@@ -143,7 +143,7 @@ public class Chess
 					System.out.println("Invalid input, try again");
 					continue;
 				}
-				if (Board.board[row1][col1] != null && Board.board[row1][col1].move(input) == true)
+				if (Board.board[row1][col1] != null && Board.board[row1][col1].move(input, true))
 				{
 					draw = false;
 					if (input.length() >= 11)

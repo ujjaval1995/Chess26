@@ -155,10 +155,8 @@ public class Board
 				attacker = Board.board[i][j];
 				if (attacker != null && !attacker.hasColor(color))
 				{
-					if (attacker.move(col_to_file(j) + "" + row_to_rank(i) + " " + col_to_file(y) + "" + row_to_rank(x)))
+					if (attacker.move(col_to_file(j) + "" + row_to_rank(i) + " " + col_to_file(y) + "" + row_to_rank(x), false))
 					{
-						Board.board[x][y] = king;
-						Board.board[i][j] = attacker;
 						// System.out.println(color + " in check by " + col_to_file(j) + row_to_rank(i));
 						return true;
 					}
@@ -181,7 +179,7 @@ public class Board
 					{
 						for (int y=0; y<8; y++)
 						{
-							if (piece.move(col_to_file(j) + "" + row_to_rank(i) + " " + col_to_file(y) + "" + row_to_rank(x)))
+							if (piece.move(col_to_file(j) + "" + row_to_rank(i) + " " + col_to_file(y) + "" + row_to_rank(x), false))
 							{
 								return false;
 							}

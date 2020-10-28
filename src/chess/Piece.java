@@ -64,13 +64,9 @@ public abstract class Piece
 		}
 	}
 	
-	// COMPLETE
-	// add boolean parameter in all move functions for move vs can_move
-	// change (String input) to (int row1, int col1, int row2, int col2) where possible
+	public abstract boolean move(String input, boolean modify);
 	
-	public abstract boolean move(String input);
-	
-	public boolean regular_move(int row1, int col1, int row2, int col2)
+	public boolean regular_move(int row1, int col1, int row2, int col2, boolean modify)
 	{
 		if (Board.board[row2][col2] == null) // move
 		{
@@ -84,6 +80,11 @@ public abstract class Piece
 			}
 			else
 			{
+				if (!modify)
+				{
+					Board.board[row1][col1] = this;
+					Board.board[row2][col2] = null;
+				}
 				return true;
 			}
 		}
@@ -93,7 +94,7 @@ public abstract class Piece
 		}
 	}
 	
-	public boolean capture_move(int row1, int col1, int row2, int col2)
+	public boolean capture_move(int row1, int col1, int row2, int col2, boolean modify)
 	{		
 		if (!Board.board[row2][col2].hasColor(color)) // capture
 		{
@@ -108,6 +109,11 @@ public abstract class Piece
 			}
 			else
 			{
+				if (!modify)
+				{
+					Board.board[row1][col1] = this;
+					Board.board[row2][col2] = piece;
+				}
 				return true;
 			}
 		}
@@ -117,13 +123,8 @@ public abstract class Piece
 		}
 	}
 	
-	public boolean move_straight(String input)
-	{
-		int col1 = Board.file_to_col(input.charAt(0));
-		int row1 = Board.rank_to_row(input.charAt(1));
-		int col2 = Board.file_to_col(input.charAt(3));
-		int row2 = Board.rank_to_row(input.charAt(4));
-		
+	public boolean move_straight(int row1, int col1, int row2, int col2, boolean modify)
+	{		
 		if (row1 == row2 && col1 == col2) // same
 		{
 			return false;
@@ -156,16 +157,11 @@ public abstract class Piece
 		{
 			return false;
 		}
-		return (regular_move(row1, col1, row2, col2) || capture_move(row1, col1, row2, col2));
+		return (regular_move(row1, col1, row2, col2, modify) || capture_move(row1, col1, row2, col2, modify));
 	}
 	
-	public boolean move_diagonal(String input)
-	{
-		int col1 = Board.file_to_col(input.charAt(0));
-		int row1 = Board.rank_to_row(input.charAt(1));
-		int col2 = Board.file_to_col(input.charAt(3));
-		int row2 = Board.rank_to_row(input.charAt(4));
-		
+	public boolean move_diagonal(int row1, int col1, int row2, int col2, boolean modify)
+	{	
 		if (row1 == row2 || col1 == col2) // same, horizontal, vertical
 		{
 			return false;
@@ -222,6 +218,6 @@ public abstract class Piece
 		{
 			return false;
 		}
-		return (regular_move(row1, col1, row2, col2) || capture_move(row1, col1, row2, col2));
+		return (regular_move(row1, col1, row2, col2, modify) || capture_move(row1, col1, row2, col2, modify));
 	}
 }

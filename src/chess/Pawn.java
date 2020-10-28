@@ -17,7 +17,7 @@ public class Pawn extends Piece
 		return super.toString() + "p";
 	}
 
-	public boolean move(String input)
+	public boolean move(String input, boolean modify)
 	{
 		int col1 = Board.file_to_col(input.charAt(0));
 		int row1 = Board.rank_to_row(input.charAt(1));
