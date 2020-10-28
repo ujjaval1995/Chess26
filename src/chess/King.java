@@ -57,7 +57,7 @@ public class King extends Piece
 			if (regular_move(row1, col1, row1, col1+1, false) && regular_move(row1, col1, row1, col1+2, false)) // move and clear path
 			{
 				Piece piece = Board.board[row1][7];
-				if (piece != null && piece instanceof Rook && piece.hasColor(this.getColor()))
+				if (piece instanceof Rook && piece.hasColor(this.getColor()))
 				{
 					Rook rook = (Rook) piece;
 					if (rook.moved)
@@ -99,7 +99,7 @@ public class King extends Piece
 			if (regular_move(row1, col1, row1, col1-1, false) && regular_move(row1, col1, row1, col1-2, false)) // move and clear path
 			{
 				Piece piece = Board.board[row1][0];
-				if (piece != null && piece instanceof Rook && piece.hasColor(this.getColor()))
+				if (piece instanceof Rook && piece.hasColor(this.getColor()))
 				{
 					Rook rook = (Rook) piece;
 					if (rook.moved)

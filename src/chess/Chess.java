@@ -42,7 +42,7 @@ public class Chess
 			for (int j=0; j<8; j++)
 			{
 				Piece piece = Board.board[i][j];
-				if (piece != null && piece instanceof Pawn)
+				if (piece instanceof Pawn)
 				{
 					if (turn.equals(piece.getColor()))
 					{
