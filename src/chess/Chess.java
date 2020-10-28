@@ -4,6 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * This class represents the Chess.
+ *
+ * @author Jishnu Patel
+ * @author Ujjaval Shah
+ */
+
 public class Chess
 {
 	static String turn = "white";
@@ -72,6 +79,9 @@ public class Chess
 		}
 	}
 
+	/**
+	 * This is the main class.
+	 */
 	public static void main(String[] args)
 	{
 		Board.make_board();

@@ -1,5 +1,10 @@
 package chess;
-
+/**
+ * This class represents the ChessBoard.
+ *
+ * @author Jishnu Patel
+ * @author Ujjaval Shah
+ */
 public class Board
 {
 	static Piece[][] board;

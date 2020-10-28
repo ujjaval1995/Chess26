@@ -1,4 +1,10 @@
 package chess;
+/**
+ * This class represents the general Piece.
+ *
+ * @author Jishnu Patel
+ * @author Ujjaval Shah
+ */
 
 public abstract class Piece
 {
@@ -53,6 +59,10 @@ public abstract class Piece
 	}
 	
 	public abstract boolean move(String input, boolean modify);
+	
+	/**
+	 * This class represents a regular move on the ChessBoard.
+	 */
 	
 	public boolean regular_move(int row1, int col1, int row2, int col2, boolean modify)
 	{
@@ -111,6 +121,9 @@ public abstract class Piece
 		}
 	}
 	
+	/**
+	 * This class represents a straight move on the ChessBoard.
+	 */
 	public boolean move_straight(int row1, int col1, int row2, int col2, boolean modify)
 	{		
 		if (row1 == row2 && col1 == col2) // same
@@ -147,6 +160,9 @@ public abstract class Piece
 		}
 		return (regular_move(row1, col1, row2, col2, modify) || capture_move(row1, col1, row2, col2, modify));
 	}
+	/**
+	 * This class represents a diagonal move on the ChessBoard.
+	 */
 	
 	public boolean move_diagonal(int row1, int col1, int row2, int col2, boolean modify)
 	{	

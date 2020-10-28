@@ -1,5 +1,11 @@
 package chess;
 
+/**
+ * This class represents the piece Rook.
+ *
+ * @author Jishnu Patel
+ * @author Ujjaval Shah
+ */
 public class Rook extends Piece
 {
 	boolean moved = false;

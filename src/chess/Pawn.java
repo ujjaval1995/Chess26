@@ -1,5 +1,11 @@
 package chess;
 
+/**
+ * This class represents the piece Pawn.
+ *
+ * @author Jishnu Patel
+ * @author Ujjaval Shah
+ */
 public class Pawn extends Piece
 {
 	boolean moved;

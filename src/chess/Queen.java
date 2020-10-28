@@ -1,5 +1,11 @@
 package chess;
 
+/**
+ * This class represents the thge piece Queen.
+ *
+ * @author Jishnu Patel
+ * @author Ujjaval Shah
+ */
 public class Queen extends Piece
 {
 	Queen(String color)

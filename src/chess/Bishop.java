@@ -1,5 +1,10 @@
 package chess;
-
+/**
+ * This class represents the Bishop.
+ *
+ * @author Jishnu Patel
+ * @author Ujjaval Shah
+ */
 public class Bishop extends Piece
 {
 	Bishop(String color)

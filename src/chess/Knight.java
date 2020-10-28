@@ -1,5 +1,11 @@
 package chess;
 
+/**
+ * This class represents the piece Knight.
+ *
+ * @author Jishnu Patel
+ * @author Ujjaval Shah
+ */
 public class Knight extends Piece
 {
 	Knight(String color)

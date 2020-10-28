@@ -1,5 +1,11 @@
 package chess;
 
+/**
+ * This class represents the piece King.
+ *
+ * @author Jishnu Patel
+ * @author Ujjaval Shah
+ */
 public class King extends Piece
 {
 	boolean moved;
