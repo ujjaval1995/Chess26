@@ -96,7 +96,7 @@ public abstract class Piece
 	
 	public boolean capture_move(int row1, int col1, int row2, int col2, boolean modify)
 	{		
-		if (!Board.board[row2][col2].hasColor(color)) // capture
+		if (Board.board[row2][col2] != null && !Board.board[row2][col2].hasColor(color)) // capture
 		{
 			Piece piece = Board.board[row2][col2];
 			Board.board[row1][col1] = null;
