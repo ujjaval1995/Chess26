@@ -109,6 +109,18 @@ public class Chess
 		while (!game_over)
 		{	
 			Board.print_board();
+			if (Board.checkmate(turn))
+			{
+				System.out.println("Checkmate");
+				change_turn();
+				game_over = true;
+				break;
+			}
+			else if (Board.check(turn))
+			{
+				System.out.println("Check");
+			}
+			
 			String input = "";
 			int row1 = -1, col1 = -1, row2 = -1, col2 = -1;
 			
