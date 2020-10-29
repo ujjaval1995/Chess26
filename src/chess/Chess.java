@@ -18,7 +18,7 @@ public class Chess
 	static boolean draw = false;
 	static boolean game_over = false;
 	
-	static boolean test = true;
+	static boolean test = false;
 	
 	static void print_turn()
 	{
@@ -168,6 +168,7 @@ public class Chess
 						if (input.substring(input.length()-5).equals("draw?"))
 						{
 							draw = true;
+							end_game();
 						}
 					}
 					break;
