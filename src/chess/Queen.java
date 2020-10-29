@@ -1,7 +1,7 @@
 package chess;
 
 /**
- * This class represents the thge piece Queen.
+ * This class represents the piece Queen.
  *
  * @author Jishnu Patel
  * @author Ujjaval Shah
