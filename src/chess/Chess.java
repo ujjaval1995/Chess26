@@ -168,7 +168,6 @@ public class Chess
 						if (input.substring(input.length()-5).equals("draw?"))
 						{
 							draw = true;
-							end_game();
 						}
 					}
 					break;
